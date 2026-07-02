@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Lisa Ecke | Donate Campaign Funds | JP District 6</title>
+    <meta name="description" content="Support Lisa Ecke's reelection campaign for Washington County Justice of the Peace, District 6. Make a donation to help keep Washington County moving forward.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="donation-page">
+
+    <!-- Top Campaign Bar -->
+    <div class="top-bar">
+        <span>VOTE RE-ELECT LISA ECKE FOR JP DISTRICT 6 &bull; KEEPING TAXES LOW &bull; SUPPORTING FIRST RESPONDERS</span>
+    </div>
+
+    <!-- Navigation Header (simplified for donation flow) -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-main">LISA ECKE</span>
+                <span class="logo-sub">JUSTICE OF THE PEACE</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">&larr; Return to Home Page</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="donation-main">
+        <div class="donation-container">
+            
+            <!-- Donation Left Column: Copy & Details -->
+            <div class="donation-details scroll-reveal">
+                <div class="donation-badge-container">
+                    <span class="hero-badge">SUPPORT THE CAMPAIGN</span>
+                </div>
+                <h1 class="donation-title">Keep Washington County Strong</h1>
+                <p class="donation-intro">Your financial support enables Lisa Ecke to spread her message of fiscal conservatism, safety, and community service across Quorum Court District 6. Every dollar is spent directly on campaign flyers, signs, and reaching voters.</p>
+                
+                <div class="platform-brief">
+                    <h3>Your Contribution Helps Support:</h3>
+                    <ul>
+                        <li><strong>Lower Taxes:</strong> Prioritizing lean budgets and opposing property tax hikes.</li>
+                        <li><strong>Safety Funding:</strong> Securing resources and higher wages for law enforcement.</li>
+                        <li><strong>Our Veterans:</strong> Sustaining essential county veteran services.</li>
+                        <li><strong>Community Outreach:</strong> Yard signs, brochures, and grassroot townhalls.</li>
+                    </ul>
+                </div>
+
+                <div class="compliance-highlight">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-6.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <p><strong>Election Law Compliance:</strong> Political contributions require employer and occupation reporting. Maximum personal contributions are governed by Arkansas State Law.</p>
+                </div>
+            </div>
+
+            <!-- Donation Right Column: Form -->
+            <div class="donation-form-container scroll-reveal">
+                <form class="donation-form" id="donation-portal-form">
+                    
+                    <!-- Step 1: Choose Amount -->
+                    <div class="form-section">
+                        <span class="step-num">1</span>
+                        <h2 class="step-title">Choose Donation Amount</h2>
+                        
+                        <div class="amount-grid">
+                            <button type="button" class="amount-btn" data-amount="25">$25</button>
+                            <button type="button" class="amount-btn" data-amount="50">$50</button>
+                            <button type="button" class="amount-btn active" data-amount="100">$100</button>
+                            <button type="button" class="amount-btn" data-amount="250">$250</button>
+                            <button type="button" class="amount-btn" data-amount="500">$500</button>
+                            <button type="button" class="amount-btn" data-amount="1000">$1,000</button>
+                        </div>
+
+                        <div class="form-group custom-amount-group">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="custom-amount" min="1" step="1" placeholder="Other Amount">
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Compliance Information -->
+                    <div class="form-section">
+                        <span class="step-num">2</span>
+                        <h2 class="step-title">Donor Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" required placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" required placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" required placeholder="123 Main St">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required placeholder="Springdale">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required placeholder="AR" value="AR" maxlength="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" required placeholder="72764">
+                            </div>
+                        </div>
+
+                        <div class="compliance-row">
+                            <div class="form-group">
+                                <label for="employer">Employer</label>
+                                <input type="text" id="employer" required placeholder="Self-Employed / Company Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" id="occupation" required placeholder="Business Owner / Ret. / Homemaker">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Mock / WinRed Integration -->
+                    <div class="form-section">
+                        <span class="step-num">3</span>
+                        <h2 class="step-title">Contribution Method</h2>
+                        
+                        <div class="winred-redirect-card">
+                            <div class="winred-logo-wrapper">
+                                <svg class="winred-logo-icon" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg>
+                                <span>Future WinRed Fundraising Link</span>
+                            </div>
+                            <p>This button is currently configured as a campaign mock simulator. When live, this page will safely redirect donors directly to our secure **WinRed** checkout page.</p>
+                        </div>
+
+                        <div class="compliance-agreement">
+                            <input type="checkbox" id="compliance-check" required>
+                            <label for="compliance-check">
+                                I confirm that I am a U.S. citizen or lawfully admitted permanent resident, I am at least 18 years old, and this contribution is made from my own personal funds.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100" id="donate-submit-btn">Donate $100 Now</button>
+                        <div id="donation-feedback" class="form-feedback"></div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-logo">
+                <span class="logo-main">LISA ECKE</span>
+                <span class="logo-sub">JUSTICE OF THE PEACE</span>
+            </div>
+            
+            <p class="disclosure-box">
+                PAID FOR BY LISA ECKE FOR JUSTICE OF THE PEACE<br>
+                Contributions are not tax-deductible for federal or state income tax purposes. Arkansas election law limits personal contributions to $3,300 per candidate per election cycle.
+            </p>
+            
+            <p class="copyright">&copy; 2026 Re-Elect Lisa Ecke. All Rights Reserved. Prepared in Springdale, Washington County, Arkansas.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
