@@ -1,0 +1,1189 @@
+/* Campaign Print Stylesheet - JP Lisa Ecke */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;700&display=swap');
+
+:root {
+    --primary-blue: #0a2540;
+    --primary-blue-dark: #051021;
+    --primary-red: #a6192e;
+    --accent-gold: #c59b27;
+    --accent-gold-light: #f7f3e8;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-dark: #1a202c;
+    --text-muted: #4a5568;
+    --text-light: #f7fafc;
+    
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background-color: #525659; /* Neutral background to display print layouts clearly in browser */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Page Setup for Printing */
+@media print {
+    body {
+        background-color: var(--bg-white);
+        padding: 0;
+        display: block;
+    }
+    
+    .print-page {
+        page-break-after: always;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+}
+
+/* Base Print Page Containers */
+.print-page {
+    background-color: var(--bg-white);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+}
+
+/* Business Card Specifications */
+/* Final Cut: 3.5" x 2" | Bleed: 3.75" x 2.25" */
+.business-card {
+    width: 3.75in;
+    height: 2.25in;
+    padding: 0.125in; /* 0.125in bleed area on all sides */
+}
+
+.card-content {
+    width: 3.5in;
+    height: 2.0in;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+/* Mailer Postcard Specifications */
+/* Final Cut: 9" x 6" | Bleed: 9.25" x 6.25" */
+.postcard {
+    width: 9.25in;
+    height: 6.25in;
+    padding: 0.125in; /* 0.125in bleed area on all sides */
+}
+
+.postcard-content {
+    width: 9.0in;
+    height: 6.0in;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+/* Trim/Bleed Marks Visual Indicator for Browser */
+.print-page::before {
+    content: '';
+    position: absolute;
+    top: 0.125in;
+    left: 0.125in;
+    right: 0.125in;
+    bottom: 0.125in;
+    border: 1px dashed rgba(197, 155, 39, 0.4);
+    pointer-events: none;
+    z-index: 100;
+}
+
+@media print {
+    .print-page::before {
+        display: none; /* Hide trim lines when printed */
+    }
+}
+
+/* Shared Card Layouts & Backgrounds */
+.bg-navy {
+    background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+    color: var(--text-light);
+}
+
+.bg-navy .text-muted {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-light-cream {
+    background-color: var(--accent-gold-light);
+    color: var(--text-dark);
+}
+
+/* Business Card Front styling */
+.card-front {
+    justify-content: space-between;
+}
+
+.card-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+}
+
+.card-title h1 {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--text-light);
+    letter-spacing: 1.5px;
+    line-height: 1;
+}
+
+.card-title span {
+    font-size: 0.6rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 4px;
+}
+
+.party-badge {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    font-size: 0.45rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--accent-gold);
+}
+
+.card-body-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.card-portrait-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2.5px solid var(--accent-gold);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.card-portrait-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.card-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-bullet {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+.card-bullet svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--accent-gold);
+    flex-shrink: 0;
+}
+
+.card-footer-main {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-website {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--accent-gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* Business Card Back styling */
+.card-back {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.qr-wrapper {
+    background-color: var(--bg-white);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--accent-gold);
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.qr-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.card-back-text h2 {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-back-text p {
+    font-size: 0.55rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+
+/* Postcard Mailer Front styling */
+.postcard-front {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    height: 100%;
+}
+
+.postcard-front-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.mailer-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mailer-badge-stars {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.postcard-front-left h1 {
+    font-family: var(--font-heading);
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+    line-height: 1.1;
+    margin-top: 10px;
+}
+
+.postcard-front-left h1 span {
+    color: var(--primary-red);
+}
+
+.postcard-front-left .subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.postcard-front-left .tagline {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
+.postcard-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    flex-grow: 1;
+}
+
+.postcard-pillar {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.postcard-pillar-icon {
+    width: 22px;
+    height: 22px;
+    fill: var(--accent-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.postcard-pillar-text h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.postcard-pillar-text p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+    margin-bottom: 0;
+}
+
+.postcard-front-footer {
+    border-top: 2px solid var(--border-color);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vote-date-box {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--accent-gold);
+}
+
+.postcard-front-right {
+    position: relative;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 5px solid var(--bg-white);
+    box-shadow: var(--shadow-lg);
+}
+
+.postcard-front-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.postcard-image-accent {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background-color: rgba(10, 37, 64, 0.9);
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-left: 3px solid var(--primary-red);
+}
+
+
+/* Postcard Mailer Back styling */
+.postcard-back {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 35px;
+    height: 100%;
+}
+
+.postcard-back-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.postcard-back-left h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 6px;
+}
+
+.postcard-bio {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+}
+
+.postcard-bio strong {
+    color: var(--primary-blue);
+}
+
+.postcard-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    flex-grow: 1;
+}
+
+.postcard-quote-card {
+    background-color: var(--bg-white);
+    border-left: 3px solid var(--primary-red);
+    padding: 8px 12px;
+    box-shadow: var(--shadow-sm);
+    border-radius: 0 4px 4px 0;
+}
+
+.postcard-quote-card p {
+    font-size: 0.7rem;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.postcard-quote-card cite {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-style: normal;
+}
+
+.postcard-quote-card cite span {
+    color: var(--accent-gold);
+}
+
+.postcard-back-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-left: 1px dashed var(--border-color);
+    padding-left: 25px;
+}
+
+/* Mailing panel / stamp area */
+.mailing-panel {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--bg-light);
+    position: relative;
+    margin-top: 30px;
+}
+
+.mailing-panel::after {
+    content: 'PLACE STAMP HERE';
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.postage-indicia {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 1.5px solid var(--text-dark);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.45rem;
+    font-weight: 700;
+    line-height: 1.1;
+    background-color: var(--bg-white);
+}
+
+.postcard-action-panel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--primary-blue-dark);
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: var(--text-light);
+    border-bottom: 3px solid var(--accent-gold);
+    margin-top: auto;
+}
+
+.postcard-action-panel .qr-code {
+    width: 65px;
+    height: 65px;
+    background-color: var(--bg-white);
+    padding: 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.postcard-action-panel .qr-code img {
+    width: 100%;
+    height: 100%;
+}
+
+.postcard-action-text h4 {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    letter-spacing: 0.5px;
+}
+
+.postcard-action-text p {
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.2;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+
+.paid-for-disclosure {
+    font-size: 0.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--border-color);
+    padding: 4px;
+}
+
+/* Full-Bleed Overlay Postcard Front (Option 2) */
+.postcard-front-overlay {
+    position: relative;
+    height: 100%;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.postcard-bg-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+}
+
+.postcard-overlay-card {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(10, 37, 64, 0.92) 0%, rgba(5, 16, 33, 0.98) 100%);
+    border-top: 3px solid var(--accent-gold);
+    width: 100%;
+    height: 2.2in; /* covering lower 36% of the postcard */
+    padding: 14px 24px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.overlay-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 20px;
+    height: 100%;
+    justify-content: center;
+}
+
+.overlay-left h1 {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: var(--text-light) !important;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    font-family: var(--font-heading);
+}
+
+.overlay-left span {
+    font-size: 0.65rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 2px;
+}
+
+.overlay-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2px;
+}
+
+.overlay-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    justify-content: center;
+}
+
+.overlay-pillar {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.overlay-pillar h3 {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.overlay-pillar p {
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.25;
+}
+
+.bottom-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+}
+
+/* Option 3 - Full-Bleed Overlay Postcard Front (Taller & Larger Typography) */
+.postcard-overlay-card-v3 {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(10, 37, 64, 0.96) 0%, rgba(5, 16, 33, 0.99) 100%);
+    border-top: 3.5px solid var(--accent-gold);
+    width: 100%;
+    height: 2.45in; /* Slightly taller (covering lower 40% of the postcard) */
+    padding: 20px 28px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.overlay-left-v3 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.18);
+    padding-right: 24px;
+    height: 100%;
+    justify-content: center;
+}
+
+.overlay-left-v3 h1 {
+    font-size: 1.65rem;
+    font-weight: 900;
+    color: var(--text-light) !important;
+    letter-spacing: 1px;
+    line-height: 1.05;
+    font-family: var(--font-heading);
+}
+
+.overlay-left-v3 .office-title-v3 {
+    font-size: 0.72rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 2px;
+}
+
+.overlay-left-v3 .slogan-v3 {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.overlay-meta-v3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2px;
+}
+
+.overlay-meta-v3 .party-badge {
+    font-size: 0.55rem;
+    padding: 3px 10px;
+}
+
+.overlay-meta-v3 .vote-date-box {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--accent-gold);
+}
+
+.overlay-right-v3 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+}
+
+.overlay-pillar-v3 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.overlay-pillar-v3 h3 {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.overlay-pillar-v3 h3::before {
+    content: '\2605'; /* Gold Star */
+    font-size: 0.65rem;
+    color: var(--accent-gold);
+}
+
+.overlay-pillar-v3 p {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.35;
+}
+
+/* Option 4 - Full-Bleed Overlay Postcard Front (Premium Inset Gold Frame, SVG Icons & Early Voting) */
+.postcard-overlay-card-v4 {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(10, 37, 64, 0.96) 0%, rgba(5, 16, 33, 0.99) 100%);
+    border-top: 3.5px solid var(--accent-gold);
+    width: 100%;
+    height: 2.5in; /* Covering lower 41% of the postcard */
+    padding: 22px 30px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.postcard-overlay-card-v4::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(197, 155, 39, 0.55);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.overlay-left-v4 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.18);
+    padding-right: 24px;
+    height: 100%;
+    justify-content: center;
+    z-index: 4;
+}
+
+.overlay-left-v4 h1 {
+    font-size: 1.65rem;
+    font-weight: 900;
+    color: var(--text-light) !important;
+    letter-spacing: 1px;
+    line-height: 1.05;
+    font-family: var(--font-heading);
+}
+
+.overlay-left-v4 .office-title-v4 {
+    font-size: 0.72rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 2px;
+}
+
+.overlay-left-v4 .slogan-v4 {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.overlay-meta-v4 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.overlay-meta-v4 .party-badge {
+    font-size: 0.55rem;
+    padding: 3px 10px;
+    flex-shrink: 0;
+}
+
+.overlay-voting-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.vote-date-badge {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-light);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.48rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.vote-date-badge.red {
+    background-color: var(--primary-red);
+    border-color: var(--accent-gold);
+    color: var(--text-light) !important;
+}
+
+.overlay-right-v4 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+    z-index: 4;
+}
+
+.overlay-pillar-v4 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.overlay-pillar-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.overlay-pillar-icon {
+    width: 13px;
+    height: 13px;
+    fill: var(--accent-gold);
+    flex-shrink: 0;
+}
+
+.overlay-pillar-v4 h3 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.overlay-pillar-v4 p {
+    font-size: 0.62rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.35;
+}
+
+/* Vertical Business Card Specifications */
+/* Final Cut: 2" x 3.5" | Bleed: 2.25" x 3.75" */
+.business-card-vertical {
+    width: 2.25in;
+    height: 3.75in;
+    padding: 0.125in;
+}
+
+.card-content-vertical {
+    width: 2.0in;
+    height: 3.5in;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.card-content-vertical::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 1px solid rgba(197, 155, 39, 0.4);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.vertical-stars {
+    color: var(--accent-gold);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    z-index: 6;
+}
+
+.vertical-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 6;
+}
+
+.vertical-header h1 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    line-height: 1.05;
+}
+
+.vertical-header span {
+    font-size: 0.48rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.vertical-portrait-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--accent-gold);
+    box-shadow: var(--shadow-sm);
+    margin: 4px 0;
+    z-index: 6;
+}
+
+.vertical-sub-header {
+    font-size: 0.44rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    z-index: 6;
+}
+
+.vertical-slogan {
+    font-size: 0.48rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 2px 0 4px 0;
+    z-index: 6;
+}
+
+.vertical-portrait-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.vertical-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    z-index: 6;
+}
+
+.vertical-bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vertical-bullet-item svg {
+    width: 10px;
+    height: 10px;
+    fill: var(--accent-gold);
+    flex-shrink: 0;
+}
+
+.vertical-bullet-item h3 {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vertical-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 6px;
+    z-index: 6;
+}
+
+.vertical-footer .party-badge {
+    font-size: 0.4rem;
+    padding: 2px 6px;
+}
+
+.vertical-footer .card-website {
+    font-size: 0.65rem;
+}
+
+/* Vertical Card Back */
+.vertical-qr-wrapper {
+    background-color: var(--bg-white);
+    padding: 6px;
+    border-radius: 6px;
+    border: 2px solid var(--accent-gold);
+    width: 95px;
+    height: 95px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    z-index: 6;
+}
+
+.vertical-qr-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.vertical-back-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 6;
+    gap: 3px;
+}
+
+.vertical-back-text h2 {
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.vertical-back-text p {
+    font-size: 0.48rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.vertical-back-footer {
+    font-size: 0.48rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 6px;
+    width: 100%;
+    z-index: 6;
+}
