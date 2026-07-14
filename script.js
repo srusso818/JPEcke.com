@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
             const message = document.getElementById('message').value.trim();
             
             if (!name || !email || !message) {
@@ -85,13 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // Simulating API submit
+            // Send API submit using FormSubmit
             showFeedback(formFeedback, 'Sending message...', 'info');
             
-            setTimeout(() => {
-                showFeedback(formFeedback, `Thank you, ${name}! Your message has been sent to Lisa Ecke's campaign team. We appreciate your support.`, 'success');
-                contactForm.reset();
-            }, 1200);
+            fetch("https://formsubmit.co/ajax/Campaign@jpecke.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    message: message,
+                    _subject: "New Campaign Message from " + name
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showFeedback(formFeedback, `Thank you, ${name}! Your message has been sent to Lisa Ecke's campaign team. We appreciate your support.`, 'success');
+                    contactForm.reset();
+                } else {
+                    showFeedback(formFeedback, 'Oops! There was a problem sending your message. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                showFeedback(formFeedback, 'Oops! There was a network error. Please try again.', 'error');
+            });
         });
     }
 
