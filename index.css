@@ -131,7 +131,7 @@ p {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -173,6 +173,7 @@ p {
     color: var(--text-dark);
     padding: 8px 0;
     border-bottom: 2px solid transparent;
+    white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
