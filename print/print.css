@@ -1087,9 +1087,10 @@ body {
 .vertical-bullets {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    align-items: center;
+    gap: 6px;
+    width: auto;
+    margin: 0 auto;
+    align-items: flex-start;
     z-index: 6;
 }
 
@@ -1107,11 +1108,12 @@ body {
 }
 
 .vertical-bullet-item h3 {
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     font-weight: 800;
     color: var(--accent-gold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .vertical-footer {
