@@ -1837,3 +1837,14 @@ p {
         display: none;
     }
 }
+
+/* ==========================================================================
+   Mobile Menu Scrolled Fix
+   ========================================================================== */
+@media (max-width: 1150px) {
+    .navbar.scrolled .nav-links {
+        background-color: rgba(10, 37, 64, 0.98);
+        border-top: 1px solid var(--accent-gold);
+    }
+}
+
