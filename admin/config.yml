@@ -1,0 +1,50 @@
+backend:
+  name: git-gateway
+  repo: srusso818/JPEcke.com
+  branch: main
+  # DecapBridge endpoints:
+  # Replace YOUR_DECAPBRIDGE_SITE_ID with the Site ID generated in your DecapBridge dashboard (https://decapbridge.com)
+  identity_url: https://auth.decapbridge.com/sites/YOUR_DECAPBRIDGE_SITE_ID
+  gateway_url: https://gateway.decapbridge.com
+
+# Allows local testing if running 'npx decap-server' locally
+local_backend: false
+
+media_folder: "assets/newsletters"
+public_folder: "/assets/newsletters"
+
+site_url: "https://jpecke.com"
+display_url: "https://jpecke.com"
+logo_url: "https://jpecke.com/assets/images/lisa-portrait.jpg"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  - name: "newsletters"
+    label: "Newsletters"
+    label_singular: "Newsletter Article"
+    description: "Create and publish campaign newsletters and Quorum Court reports for Lisa Ecke"
+    folder: "content/newsletters"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date | date('MM/DD/YYYY')}}) - {{draft ? 'DRAFT' : 'PUBLISHED'}}"
+    sortable_fields: ["date", "title", "commit_date"]
+    view_filters:
+      - label: "Published Articles"
+        field: "draft"
+        pattern: false
+      - label: "Saved Drafts"
+        field: "draft"
+        pattern: true
+    fields:
+      - { label: "Article Title", name: "title", widget: "string", required: true, hint: "Headline for your newsletter article" }
+      - { label: "Publication Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "MM/DD/YYYY", time_format: "hh:mm A", required: true, hint: "Date shown to readers on the website" }
+      - { label: "Draft Mode", name: "draft", widget: "boolean", default: false, required: false, hint: "Turn ON to save as a private draft. Turn OFF to publish to the public archive." }
+      - { label: "URL Slug", name: "slug", widget: "string", required: false, hint: "Optional custom URL snippet (e.g. 'october-district-update'). If left blank, it will be automatically created from your title." }
+      - { label: "Featured Photograph", name: "featured_image", widget: "image", required: false, hint: "Main photo shown at the top of the article and on archive preview cards" }
+      - { label: "Featured Image Caption / Alt Text", name: "featured_image_alt", widget: "string", required: false, hint: "Brief description of the photo for accessibility (e.g., 'Lisa Ecke presenting at Quorum Court')" }
+      - { label: "Article Summary / Excerpt", name: "excerpt", widget: "text", required: true, hint: "1-2 sentences summarizing the article for the newsletter archive cards" }
+      - { label: "Article Content", name: "body", widget: "markdown", required: true, buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"], editor_components: ["image"] }
+      - { label: "Search Engine & Social Description", name: "seo_description", widget: "string", required: false, hint: "Optional brief text for search engines and Facebook/social sharing (defaults to summary if blank)" }

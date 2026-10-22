@@ -1,0 +1,48 @@
+name: Publish Newsletter & Update Static Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/newsletters/**'
+      - 'templates/newsletter/**'
+      - 'scripts/build-newsletter.js'
+      - 'package.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Compile Newsletter Static HTML
+        run: npm run build:newsletter
+
+      - name: Commit and Push Compiled HTML
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action [Newsletter Builder]"
+          git add newsletter/
+          if git diff --staged --quiet; then
+            echo "No changes to newsletter HTML."
+          else
+            git commit -m "chore(cms): compile static newsletter pages [skip ci]"
+            git push origin main
+          fi

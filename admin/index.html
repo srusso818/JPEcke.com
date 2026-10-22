@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Newsletter Admin | Lisa Ecke for Justice of the Peace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/newsletter/newsletter.css">
+  <style>
+    /* Admin Portal Brand Header and Helper Bar */
+    .admin-branding-banner {
+      background: #0a2540;
+      color: #ffffff;
+      padding: 10px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #c59b27;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .admin-branding-banner strong {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.05em;
+      color: #c59b27;
+    }
+    .admin-branding-banner a {
+      color: #ffffff;
+      text-decoration: underline;
+      margin-left: 15px;
+    }
+    .admin-branding-banner a:hover {
+      color: #c59b27;
+    }
+    /* Custom Decap Preview Styling Inside Editor Frame */
+    .newsletter-preview-wrapper {
+      padding: 24px;
+      background: #f8f9fa;
+      min-height: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+    .newsletter-draft-badge-banner {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-branding-banner">
+    <div>
+      <strong>LISA ECKE &bull; JUSTICE OF THE PEACE</strong> &mdash; Newsletter Administration
+    </div>
+    <div>
+      <a href="/newsletter/" target="_blank">&rarr; View Public Newsletter Archive</a>
+    </div>
+  </div>
+
+  <!-- Decap CMS Core -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- Live Editorial Preview Registration -->
+  <script>
+    if (window.CMS) {
+      CMS.registerPreviewStyle('/newsletter/newsletter.css');
+      CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+      const NewsletterPreview = createClass({
+        render: function() {
+          const entry = this.props.entry;
+          const title = entry.getIn(['data', 'title']) || 'Untitled Newsletter Article';
+          const rawDate = entry.getIn(['data', 'date']);
+          const dateStr = rawDate ? new Date(rawDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const isDraft = entry.getIn(['data', 'draft']);
+          const featuredImage = this.props.getAsset(entry.getIn(['data', 'featured_image']));
+          const featuredImageAlt = entry.getIn(['data', 'featured_image_alt']) || title;
+          const excerpt = entry.getIn(['data', 'excerpt']);
+          const body = this.props.widgetFor('body');
+
+          return h('div', { className: 'newsletter-preview-wrapper' },
+            isDraft ? h('div', { className: 'newsletter-draft-badge-banner' }, '⚠️ PRIVATE DRAFT: This post is in draft mode and will not be displayed on the public website until Draft Mode is unchecked.') : null,
+            h('article', { className: 'newsletter-article-container' },
+              h('header', { className: 'newsletter-article-header' },
+                h('span', { className: 'newsletter-category-pill' }, 'Washington County District 6'),
+                h('h1', { className: 'newsletter-article-title' }, title),
+                h('div', { className: 'newsletter-article-meta' },
+                  h('span', { className: 'newsletter-author' }, 'By Lisa Ecke, Justice of the Peace'),
+                  h('span', { className: 'newsletter-meta-sep' }, '•'),
+                  h('time', { className: 'newsletter-date' }, dateStr)
+                ),
+                excerpt ? h('p', { className: 'newsletter-article-lead' }, excerpt) : null
+              ),
+              featuredImage ? h('figure', { className: 'newsletter-article-figure' },
+                h('img', { src: featuredImage.toString(), alt: featuredImageAlt, className: 'newsletter-article-img' }),
+                featuredImageAlt ? h('figcaption', { className: 'newsletter-article-caption' }, featuredImageAlt) : null
+              ) : null,
+              h('div', { className: 'newsletter-article-body' }, body)
+            )
+          );
+        }
+      });
+
+      CMS.registerPreviewTemplate('newsletters', NewsletterPreview);
+    }
+  </script>
+</body>
+</html>

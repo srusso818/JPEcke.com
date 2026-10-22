@@ -2,3 +2,7 @@
 Photos/
 ocr_results.txt
 developer_writeup.md
+
+# Dependencies & Local Build Artifacts
+node_modules/
+.DS_Store
