@@ -232,6 +232,7 @@ function build() {
       <section class="newsletter-featured-container">
         <div class="newsletter-featured-card">
           <div class="newsletter-featured-img-wrap">
+            <div class="newsletter-featured-img-backdrop" style="background-image: url('${top.featuredImage}')"></div>
             <img src="${top.featuredImage}" alt="${top.featuredImageAlt}" class="newsletter-featured-img">
             <span class="newsletter-featured-badge">Featured Newsletter</span>
           </div>
@@ -260,6 +261,7 @@ function build() {
       gridArticlesHtml = remaining.map(art => `
         <article class="newsletter-card">
           <div class="newsletter-card-img-wrap">
+            <div class="newsletter-card-img-backdrop" style="background-image: url('${art.featuredImage}')"></div>
             <img src="${art.featuredImage}" alt="${art.featuredImageAlt}" class="newsletter-card-img">
             <span class="newsletter-card-date-badge">${art.formattedDate}</span>
           </div>

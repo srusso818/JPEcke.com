@@ -288,18 +288,34 @@ body.newsletter-page {
 .newsletter-featured-img-wrap {
   position: relative;
   overflow: hidden;
-  min-height: 340px;
-  background: #1e293b;
+  min-height: 360px;
+  background: #071a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.newsletter-featured-img-backdrop {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(18px) brightness(0.45);
+  opacity: 0.75;
+  transform: scale(1.15);
+  pointer-events: none;
 }
 .newsletter-featured-img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
   transition: transform 0.5s ease;
 }
 .newsletter-featured-card:hover .newsletter-featured-img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 .newsletter-featured-badge {
   position: absolute;
@@ -418,18 +434,37 @@ body.newsletter-page {
 }
 .newsletter-card-img-wrap {
   position: relative;
-  height: 210px;
+  height: 230px;
   overflow: hidden;
-  background: #1e293b;
+  background: #071a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.newsletter-card-img-backdrop {
+  position: absolute;
+  inset: -15px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) brightness(0.45);
+  opacity: 0.75;
+  transform: scale(1.15);
+  pointer-events: none;
 }
 .newsletter-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
   transition: transform 0.4s ease;
 }
 .newsletter-card:hover .newsletter-card-img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .newsletter-card-date-badge {
   position: absolute;
@@ -631,13 +666,18 @@ body.newsletter-page {
   border-radius: var(--nl-radius-md);
   overflow: hidden;
   box-shadow: var(--nl-shadow-sm);
-  background: #1e293b;
+  border: 1px solid var(--nl-border);
+  background: #f8fafc;
+  text-align: center;
 }
 .newsletter-article-img {
   width: 100%;
-  max-height: 520px;
-  object-fit: cover;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 .newsletter-article-caption {
   font-size: 0.84rem;
