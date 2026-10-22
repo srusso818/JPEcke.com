@@ -43,10 +43,13 @@ collections:
     description: "Create and publish campaign newsletters and Quorum Court reports for Lisa Ecke"
     folder: "content/newsletters"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     preview_path: "newsletter/{{slug}}"
-    summary: "{{title}} • {{date | date('MMM D, YYYY')}}"
-    sortable_fields: ["date", "title", "commit_date"]
+    summary: "{{title}} • {{date | date('MMM D, YYYY')}} [img:{{featured_image}}]"
+    sortable_fields:
+      - { field: "date", default_sort: "desc" }
+      - "title"
+      - "commit_date"
     view_filters:
       - label: "Published Articles"
         field: "draft"

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Newsletter Admin | Lisa Ecke for Justice of the Peace</title>
-  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml?v=20261022c" />
+  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml?v=20261022d" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -28,15 +28,51 @@
       font-weight: 600;
       font-size: 0.9rem;
     }
+    /* List View Post Thumbnails */
+    .decap-list-thumb {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-right: 14px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    /* Align cards in list view with thumbnail */
+    a[href*="/collections/newsletters/entries/"] {
+      display: flex !important;
+      align-items: center !important;
+    }
   </style>
+
+  <script>
+    // Ensure default sort order is Newest to Oldest (Date Descending)
+    try {
+      const defaultSort = {
+        newsletters: {
+          key: 'date',
+          direction: 'Descending'
+        }
+      };
+      if (!localStorage.getItem('decap-cms.entries.sort')) {
+        localStorage.setItem('decap-cms.entries.sort', JSON.stringify(defaultSort));
+      }
+      if (!localStorage.getItem('netlify-cms.entries.sort')) {
+        localStorage.setItem('netlify-cms.entries.sort', JSON.stringify(defaultSort));
+      }
+    } catch(e) {}
+  </script>
 </head>
 <body>
   <!-- Decap CMS Core (Pinned to v3.8.3 for DecapBridge PKCE and stable media blob previews) -->
   <script src="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js"></script>
 
-  <!-- Live Editorial Preview Registration & UI Simplification -->
+  <!-- Live Editorial Preview Registration & UI Enhancements -->
   <script>
-    // Hide confusing publish dropdown options ("Publish and create new", "Publish and duplicate")
+    // 1. Hide confusing publish dropdown options ("Publish and create new", "Publish and duplicate")
     const cleanPublishMenuObserver = new MutationObserver(function() {
       const candidates = document.querySelectorAll('button, a, div[role="menuitem"], li, span');
       candidates.forEach(function(el) {
@@ -48,6 +84,32 @@
       });
     });
     cleanPublishMenuObserver.observe(document.body, { childList: true, subtree: true });
+
+    // 2. Inject photo thumbnails into list view cards and clean [img:...] marker
+    const thumbObserver = new MutationObserver(function() {
+      const cards = document.querySelectorAll('a[href*="/collections/newsletters/entries/"]');
+      cards.forEach(function(card) {
+        if (card.dataset.thumbChecked) return;
+        const html = card.innerHTML;
+        if (html.includes('[img:')) {
+          const match = html.match(/\[img:(.*?)\]/);
+          card.innerHTML = card.innerHTML.replace(/\[img:.*?\]/g, '');
+          card.dataset.thumbChecked = 'true';
+          if (match && match[1] && match[1].trim().length > 3) {
+            let imgUrl = match[1].trim();
+            if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+              imgUrl = '/' + imgUrl;
+            }
+            const img = document.createElement('img');
+            img.src = imgUrl;
+            img.className = 'decap-list-thumb';
+            img.alt = 'Thumbnail';
+            card.prepend(img);
+          }
+        }
+      });
+    });
+    thumbObserver.observe(document.body, { childList: true, subtree: true });
 
     if (window.CMS) {
       CMS.registerPreviewStyle('/newsletter/newsletter.css');

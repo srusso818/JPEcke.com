@@ -211,6 +211,15 @@ function build() {
     ensureDirSync(articleDir);
     fs.writeFileSync(path.join(articleDir, 'index.html'), html, 'utf-8');
     console.log(`[Generated Article] /newsletter/${art.slug}/index.html`);
+
+    // If filename has a date prefix (e.g. 2026-10-22-test-newsletter-2), also output alias folder so Decap CMS's old preview_path never 404s!
+    const rawBaseName = art.filename.replace(/\.md$/, '');
+    if (rawBaseName !== art.slug) {
+      const aliasDir = path.join(OUTPUT_NEWSLETTER_DIR, rawBaseName);
+      ensureDirSync(aliasDir);
+      fs.writeFileSync(path.join(aliasDir, 'index.html'), html, 'utf-8');
+      console.log(`[Generated Alias Article] /newsletter/${rawBaseName}/index.html`);
+    }
   }
 
   // Build Newsletter Archive Page (/newsletter/index.html)
