@@ -144,7 +144,7 @@ function build() {
       featuredImage = '/' + featuredImage;
     }
 
-    const title = data.title || 'Washington County District 6 Dispatch';
+    const title = data.title || 'Washington County District 6 Newsletter';
     const dateVal = data.date ? new Date(data.date) : new Date();
     const excerpt = generateExcerpt(content, data.excerpt);
     const seoDesc = (data.seo_description || excerpt).replace(/"/g, '&quot;');
@@ -224,7 +224,7 @@ function build() {
         <div class="newsletter-featured-card">
           <div class="newsletter-featured-img-wrap">
             <img src="${top.featuredImage}" alt="${top.featuredImageAlt}" class="newsletter-featured-img">
-            <span class="newsletter-featured-badge">Featured Dispatch</span>
+            <span class="newsletter-featured-badge">Featured Newsletter</span>
           </div>
           <div class="newsletter-featured-body">
             <div class="newsletter-meta-line">
@@ -239,7 +239,7 @@ function build() {
             </h2>
             <p class="newsletter-featured-excerpt">${top.excerpt}</p>
             <a href="/newsletter/${top.slug}/" class="newsletter-btn-read">
-              Read Full Dispatch &rarr;
+              Read Full Newsletter &rarr;
             </a>
           </div>
         </div>
@@ -272,7 +272,7 @@ function build() {
     } else {
       gridArticlesHtml = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; background: #ffffff; border-radius: 8px; border: 1px dashed #cbd5e1;">
-          <p style="color: #64748b; font-size: 1.05rem; margin: 0;">More Quorum Court dispatches and community updates are currently in preparation. Check back soon!</p>
+          <p style="color: #64748b; font-size: 1.05rem; margin: 0;">More Quorum Court newsletters and community updates are currently in preparation. Check back soon!</p>
         </div>
       `;
     }
@@ -281,7 +281,7 @@ function build() {
       <section class="newsletter-featured-container" style="text-align: center; padding: 60px 20px;">
         <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
           <h2 style="font-family: 'Cinzel', serif; color: #0a2540; margin-bottom: 12px;">Newsletter Under Preparation</h2>
-          <p style="color: #64748b;">The first edition of District 6 Dispatch will be published shortly. Stay tuned!</p>
+          <p style="color: #64748b;">The first edition of District 6 Newsletter will be published shortly. Stay tuned!</p>
         </div>
       </section>
     `;

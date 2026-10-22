@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Newsletter Admin | Lisa Ecke for Justice of the Peace</title>
+  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml?v=20261022c" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,8 +34,21 @@
   <!-- Decap CMS Core (Pinned to v3.8.3 for DecapBridge PKCE and stable media blob previews) -->
   <script src="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js"></script>
 
-  <!-- Live Editorial Preview Registration -->
+  <!-- Live Editorial Preview Registration & UI Simplification -->
   <script>
+    // Hide confusing publish dropdown options ("Publish and create new", "Publish and duplicate")
+    const cleanPublishMenuObserver = new MutationObserver(function() {
+      const candidates = document.querySelectorAll('button, a, div[role="menuitem"], li, span');
+      candidates.forEach(function(el) {
+        const text = el.textContent ? el.textContent.trim() : '';
+        if (text === 'Publish and create new' || text === 'Publish and duplicate') {
+          const item = el.closest('li') || el.closest('[role="menuitem"]') || el.closest('button') || el;
+          item.style.display = 'none';
+        }
+      });
+    });
+    cleanPublishMenuObserver.observe(document.body, { childList: true, subtree: true });
+
     if (window.CMS) {
       CMS.registerPreviewStyle('/newsletter/newsletter.css');
       CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
