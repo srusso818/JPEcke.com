@@ -115,7 +115,10 @@ backend:
   name: git-gateway
   repo: srusso818/JPEcke.com
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/YOUR_DECAPBRIDGE_SITE_ID
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/14d4db5a-2871-45b0-8f0b-ecd8f6664e2e/pkce
+  auth_token_endpoint: /sites/14d4db5a-2871-45b0-8f0b-ecd8f6664e2e/token
   gateway_url: https://gateway.decapbridge.com
 
 media_folder: "assets/newsletters"
