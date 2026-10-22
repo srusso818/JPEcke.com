@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Newsletter Admin | Lisa Ecke for Justice of the Peace</title>
-  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml?v=20261022d" />
+  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml?v=20261022e" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,16 +30,17 @@
     }
     /* List View Post Thumbnails */
     .decap-list-thumb {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       object-fit: cover;
       border-radius: 6px;
       margin-right: 14px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
       flex-shrink: 0;
       display: inline-block;
       vertical-align: middle;
+      background: #f1f5f9;
     }
     /* Align cards in list view with thumbnail */
     a[href*="/collections/newsletters/entries/"] {
@@ -49,21 +50,34 @@
   </style>
 
   <script>
-    // Ensure default sort order is Newest to Oldest (Date Descending)
-    try {
-      const defaultSort = {
-        newsletters: {
-          key: 'date',
-          direction: 'Descending'
+    // Ensure default sort order is Newest to Oldest (Date Descending in Decap Redux store)
+    (function() {
+      try {
+        var sortData = {
+          newsletters: {
+            date: {
+              key: 'date',
+              direction: 'Descending',
+              index: 0
+            }
+          }
+        };
+        var existing = localStorage.getItem('decap-cms.entries.sort');
+        var needInit = true;
+        if (existing) {
+          try {
+            var parsed = JSON.parse(existing);
+            if (parsed && parsed.newsletters && parsed.newsletters.date && parsed.newsletters.date.key === 'date') {
+              needInit = false;
+            }
+          } catch(e) {}
         }
-      };
-      if (!localStorage.getItem('decap-cms.entries.sort')) {
-        localStorage.setItem('decap-cms.entries.sort', JSON.stringify(defaultSort));
-      }
-      if (!localStorage.getItem('netlify-cms.entries.sort')) {
-        localStorage.setItem('netlify-cms.entries.sort', JSON.stringify(defaultSort));
-      }
-    } catch(e) {}
+        if (needInit) {
+          localStorage.setItem('decap-cms.entries.sort', JSON.stringify(sortData));
+          localStorage.setItem('netlify-cms.entries.sort', JSON.stringify(sortData));
+        }
+      } catch(e) {}
+    })();
   </script>
 </head>
 <body>
@@ -86,30 +100,45 @@
     cleanPublishMenuObserver.observe(document.body, { childList: true, subtree: true });
 
     // 2. Inject photo thumbnails into list view cards and clean [img:...] marker
-    const thumbObserver = new MutationObserver(function() {
+    function processThumbnails() {
       const cards = document.querySelectorAll('a[href*="/collections/newsletters/entries/"]');
       cards.forEach(function(card) {
-        if (card.dataset.thumbChecked) return;
-        const html = card.innerHTML;
-        if (html.includes('[img:')) {
-          const match = html.match(/\[img:(.*?)\]/);
-          card.innerHTML = card.innerHTML.replace(/\[img:.*?\]/g, '');
-          card.dataset.thumbChecked = 'true';
-          if (match && match[1] && match[1].trim().length > 3) {
-            let imgUrl = match[1].trim();
-            if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
-              imgUrl = '/' + imgUrl;
+        let foundImg = null;
+        const walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT, null, false);
+        let textNode;
+        while ((textNode = walker.nextNode())) {
+          if (textNode.nodeValue && textNode.nodeValue.includes('[img:')) {
+            const match = textNode.nodeValue.match(/\[img:(.*?)\]/);
+            if (match && match[1]) {
+              foundImg = match[1].trim();
             }
+            textNode.nodeValue = textNode.nodeValue.replace(/\[img:.*?\]/g, '').trim();
+          }
+        }
+
+        const existingImg = card.querySelector('.decap-list-thumb');
+        if (foundImg && foundImg.length > 3 && foundImg !== 'undefined') {
+          let imgUrl = foundImg;
+          if (!imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+            imgUrl = '/' + imgUrl;
+          }
+          if (!existingImg) {
             const img = document.createElement('img');
             img.src = imgUrl;
             img.className = 'decap-list-thumb';
-            img.alt = 'Thumbnail';
+            img.alt = 'Post Thumbnail';
+            img.onerror = function() { this.style.display = 'none'; };
             card.prepend(img);
+          } else if (existingImg.getAttribute('src') !== imgUrl) {
+            existingImg.src = imgUrl;
           }
         }
       });
-    });
+    }
+
+    const thumbObserver = new MutationObserver(processThumbnails);
     thumbObserver.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('load', processThumbnails);
 
     if (window.CMS) {
       CMS.registerPreviewStyle('/newsletter/newsletter.css');

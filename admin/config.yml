@@ -46,10 +46,7 @@ collections:
     slug: "{{slug}}"
     preview_path: "newsletter/{{slug}}"
     summary: "{{title}} • {{date | date('MMM D, YYYY')}} [img:{{featured_image}}]"
-    sortable_fields:
-      - { field: "date", default_sort: "desc" }
-      - "title"
-      - "commit_date"
+    sortable_fields: ["date", "title", "commit_date"]
     view_filters:
       - label: "Published Articles"
         field: "draft"
