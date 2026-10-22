@@ -321,6 +321,7 @@ body.newsletter-page {
   position: absolute;
   top: 18px;
   left: 18px;
+  z-index: 10;
   background: var(--nl-gold);
   color: var(--nl-blue-dark);
   font-size: 0.72rem;
@@ -470,13 +471,17 @@ body.newsletter-page {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: rgba(10, 37, 64, 0.9);
-  backdrop-filter: blur(4px);
+  z-index: 10;
+  background: rgba(10, 37, 64, 0.92);
+  backdrop-filter: blur(6px);
   color: var(--nl-white);
   font-size: 0.74rem;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
 }
 .newsletter-card-content {
   padding: 24px;
