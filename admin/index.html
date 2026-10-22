@@ -10,34 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/newsletter/newsletter.css">
   <style>
-    /* Admin Portal Brand Header and Helper Bar */
-    .admin-branding-banner {
-      background: #0a2540;
-      color: #ffffff;
-      padding: 10px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #c59b27;
-      position: sticky;
-      top: 0;
-      z-index: 9999;
-    }
-    .admin-branding-banner strong {
-      font-family: 'Cinzel', serif;
-      letter-spacing: 0.05em;
-      color: #c59b27;
-    }
-    .admin-branding-banner a {
-      color: #ffffff;
-      text-decoration: underline;
-      margin-left: 15px;
-    }
-    .admin-branding-banner a:hover {
-      color: #c59b27;
-    }
     /* Custom Decap Preview Styling Inside Editor Frame */
     .newsletter-preview-wrapper {
       padding: 24px;
@@ -58,17 +30,8 @@
   </style>
 </head>
 <body>
-  <div class="admin-branding-banner">
-    <div>
-      <strong>LISA ECKE &bull; JUSTICE OF THE PEACE</strong> &mdash; Newsletter Administration
-    </div>
-    <div>
-      <a href="/newsletter/" target="_blank">&rarr; View Public Newsletter Archive</a>
-    </div>
-  </div>
-
-  <!-- Decap CMS Core (v3.8.3+ required for DecapBridge PKCE) -->
-  <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
+  <!-- Decap CMS Core (Pinned to v3.8.3 for DecapBridge PKCE and stable media blob previews) -->
+  <script src="https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js"></script>
 
   <!-- Live Editorial Preview Registration -->
   <script>
@@ -85,7 +48,24 @@
           const isDraft = entry.getIn(['data', 'draft']);
           const featuredImage = this.props.getAsset(entry.getIn(['data', 'featured_image']));
           const featuredImageAlt = entry.getIn(['data', 'featured_image_alt']) || title;
-          const excerpt = entry.getIn(['data', 'excerpt']);
+          
+          // Auto-fallback to first sentence if excerpt is blank
+          let excerpt = entry.getIn(['data', 'excerpt']);
+          if (!excerpt || !excerpt.trim()) {
+            const rawBody = entry.getIn(['data', 'body']) || '';
+            const plain = rawBody
+              .replace(/!\[.*?\]\(.*?\)/g, '')
+              .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+              .replace(/^#+\s+.*$/gm, '')
+              .replace(/(\*\*|__)(.*?)\1/g, '$2')
+              .replace(/(\*|_)(.*?)\1/g, '$2')
+              .replace(/^>\s+/gm, '')
+              .replace(/`{1,3}.*?`{1,3}/g, '')
+              .trim();
+            const sentenceMatch = plain.match(/^([^.!?\r\n]+[.!?])/);
+            excerpt = sentenceMatch ? sentenceMatch[1].trim() : (plain.slice(0, 160) + (plain.length > 160 ? '...' : ''));
+          }
+
           const body = this.props.widgetFor('body');
 
           return h('div', { className: 'newsletter-preview-wrapper' },

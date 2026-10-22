@@ -60,6 +60,6 @@ collections:
       - { label: "URL Slug", name: "slug", widget: "string", required: false, hint: "Optional custom URL snippet (e.g. 'october-district-update'). If left blank, it will be automatically created from your title." }
       - { label: "Featured Photograph", name: "featured_image", widget: "image", required: false, hint: "Main photo shown at the top of the article and on archive preview cards" }
       - { label: "Featured Image Caption / Alt Text", name: "featured_image_alt", widget: "string", required: false, hint: "Brief description of the photo for accessibility (e.g., 'Lisa Ecke presenting at Quorum Court')" }
-      - { label: "Article Summary / Excerpt", name: "excerpt", widget: "text", required: true, hint: "1-2 sentences summarizing the article for the newsletter archive cards" }
+      - { label: "Article Summary / Excerpt (Optional)", name: "excerpt", widget: "text", required: false, hint: "Optional. Leave blank to automatically use the first sentence from your article content." }
       - { label: "Article Content", name: "body", widget: "markdown", required: true, buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"], editor_components: ["image"] }
       - { label: "Search Engine & Social Description", name: "seo_description", widget: "string", required: false, hint: "Optional brief text for search engines and Facebook/social sharing (defaults to summary if blank)" }

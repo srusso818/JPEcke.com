@@ -74,13 +74,22 @@ function generateExcerpt(content, customExcerpt) {
   const plain = content
     .replace(/!\[.*?\]\(.*?\)/g, '')
     .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-    .replace(/#+\s+/g, '')
+    .replace(/^#+\s+.*$/gm, '')
     .replace(/(\*\*|__)(.*?)\1/g, '$2')
     .replace(/(\*|_)(.*?)\1/g, '$2')
-    .replace(/>\s+/g, '')
+    .replace(/^>\s+/gm, '')
     .replace(/`{1,3}.*?`{1,3}/g, '')
     .trim();
-  return plain.slice(0, 180) + (plain.length > 180 ? '...' : '');
+
+  // Extract first complete sentence ending in ., !, or ?
+  const sentenceMatch = plain.match(/^([^.!?\r\n]+[.!?])/);
+  if (sentenceMatch && sentenceMatch[1] && sentenceMatch[1].trim().length >= 15) {
+    return sentenceMatch[1].trim();
+  }
+
+  // Fallback to first non-empty line or 160 characters
+  const firstLine = plain.split(/\r?\n/).find(line => line.trim().length > 0) || plain;
+  return firstLine.slice(0, 160) + (firstLine.length > 160 ? '...' : '');
 }
 
 function build() {

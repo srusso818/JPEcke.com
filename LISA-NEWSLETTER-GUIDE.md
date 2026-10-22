@@ -62,8 +62,8 @@ Click the **`New Newsletter Article`** button. You will see an easy-to-fill form
    *Click **Choose an image** to upload a photo from your computer (see Step 5 below).*
 6. **Featured Image Caption / Alt Text:**  
    *A short description of the photo (e.g., "Lisa Ecke presenting budget priorities at the Quorum Court").*
-7. **Article Summary / Excerpt:**  
-   *1 to 2 sentences summarizing the article. This appears on the newsletter archive cards.*
+7. **Article Summary / Excerpt (Optional):**  
+   *You can leave this completely blank! The system will automatically use the first sentence from your article. If you want to write a custom summary, you can type it here.*
 8. **Article Content:**  
    *The main body of your update where you write your message.*
 
