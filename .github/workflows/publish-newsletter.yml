@@ -11,6 +11,10 @@ on:
       - 'package.json'
   workflow_dispatch:
 
+concurrency:
+  group: publish-newsletter
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -39,10 +43,11 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action [Newsletter Builder]"
-          git add newsletter/
+          git add -A newsletter/
           if git diff --staged --quiet; then
             echo "No changes to newsletter HTML."
           else
             git commit -m "chore(cms): compile static newsletter pages [skip ci]"
+            git pull --rebase origin main || true
             git push origin main
           fi

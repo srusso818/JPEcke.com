@@ -172,9 +172,12 @@ function build() {
   articles.sort((a, b) => b.date.getTime() - a.date.getTime());
   console.log(`Processing ${articles.length} published article(s)...`);
 
+  const validDirs = new Set();
+
   // Build Individual Article Pages
   for (let i = 0; i < articles.length; i++) {
     const art = articles[i];
+    validDirs.add(art.slug);
     const prevArt = i < articles.length - 1 ? articles[i + 1] : null;
     const nextArt = i > 0 ? articles[i - 1] : null;
 
@@ -215,10 +218,23 @@ function build() {
     // If filename has a date prefix (e.g. 2026-10-22-test-newsletter-2), also output alias folder so Decap CMS's old preview_path never 404s!
     const rawBaseName = art.filename.replace(/\.md$/, '');
     if (rawBaseName !== art.slug) {
+      validDirs.add(rawBaseName);
       const aliasDir = path.join(OUTPUT_NEWSLETTER_DIR, rawBaseName);
       ensureDirSync(aliasDir);
       fs.writeFileSync(path.join(aliasDir, 'index.html'), html, 'utf-8');
       console.log(`[Generated Alias Article] /newsletter/${rawBaseName}/index.html`);
+    }
+  }
+
+  // Clean up any stale article directories in /newsletter/ that no longer exist in content/newsletters/
+  if (fs.existsSync(OUTPUT_NEWSLETTER_DIR)) {
+    const existingItems = fs.readdirSync(OUTPUT_NEWSLETTER_DIR);
+    for (const item of existingItems) {
+      const itemPath = path.join(OUTPUT_NEWSLETTER_DIR, item);
+      if (fs.statSync(itemPath).isDirectory() && !validDirs.has(item)) {
+        console.log(`[Cleaned Stale Directory] /newsletter/${item}`);
+        fs.rmSync(itemPath, { recursive: true, force: true });
+      }
     }
   }
 
