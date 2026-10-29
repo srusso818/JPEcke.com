@@ -629,6 +629,7 @@ body.newsletter-page {
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 20%;
   border: 2px solid var(--nl-gold);
 }
 .newsletter-author-info {
@@ -783,6 +784,7 @@ body.newsletter-page {
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 20%;
   border: 3px solid var(--nl-gold);
   flex-shrink: 0;
 }

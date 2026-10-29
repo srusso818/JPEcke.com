@@ -181,9 +181,13 @@
                 h('span', { className: 'newsletter-category-pill' }, 'Washington County District 6'),
                 h('h1', { className: 'newsletter-article-title' }, title),
                 h('div', { className: 'newsletter-article-meta' },
-                  h('span', { className: 'newsletter-author' }, 'By Lisa Ecke, Justice of the Peace'),
+                  h('img', { src: '/assets/images/lisa-hero.jpg', alt: 'Lisa Ecke Portrait', className: 'newsletter-author-thumb' }),
+                  h('div', { className: 'newsletter-author-info' },
+                    h('span', { className: 'newsletter-author-name' }, 'Lisa Ecke'),
+                    h('span', { className: 'newsletter-author-role' }, 'Justice of the Peace, District 6')
+                  ),
                   h('span', { className: 'newsletter-meta-sep' }, '•'),
-                  h('time', { className: 'newsletter-date' }, dateStr)
+                  h('time', { className: 'newsletter-publish-date' }, dateStr)
                 ),
                 excerpt ? h('p', { className: 'newsletter-article-lead' }, excerpt) : null
               ),
