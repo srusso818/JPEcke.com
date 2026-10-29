@@ -321,7 +321,38 @@ function build() {
 
   fs.writeFileSync(path.join(OUTPUT_NEWSLETTER_DIR, 'index.html'), archiveHtml, 'utf-8');
   console.log(`[Generated Archive] /newsletter/index.html with ${articles.length} published post(s).`);
+
+  // Generate XML Sitemap for Search Engine Discovery
+  generateSitemap(articles);
+
   console.log('--- Newsletter Build Completed Successfully! ---');
+}
+
+function generateSitemap(articles) {
+  const today = new Date().toISOString().split('T')[0];
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  const staticPages = [
+    { url: 'https://jpecke.com/', priority: '1.0', changefreq: 'weekly' },
+    { url: 'https://jpecke.com/newsletter/', priority: '0.9', changefreq: 'daily' },
+    { url: 'https://jpecke.com/compare.html', priority: '0.8', changefreq: 'weekly' },
+    { url: 'https://jpecke.com/gallery.html', priority: '0.7', changefreq: 'monthly' },
+    { url: 'https://jpecke.com/donate.html', priority: '0.7', changefreq: 'monthly' }
+  ];
+
+  for (const page of staticPages) {
+    xml += `  <url>\n    <loc>${page.url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${page.changefreq}</changefreq>\n    <priority>${page.priority}</priority>\n  </url>\n`;
+  }
+
+  for (const art of articles) {
+    const lastMod = art.isoDate ? art.isoDate.split('T')[0] : today;
+    xml += `  <url>\n    <loc>${art.canonicalUrl}</loc>\n    <lastmod>${lastMod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+  }
+
+  xml += `</urlset>\n`;
+  const sitemapPath = path.join(ROOT_DIR, 'sitemap.xml');
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+  console.log(`[Generated Sitemap] sitemap.xml with ${staticPages.length + articles.length} URLs.`);
 }
 
 build();
