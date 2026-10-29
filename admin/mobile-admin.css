@@ -1,0 +1,625 @@
+/* ==========================================================================
+   Decap CMS Mobile & Responsive Enhancements for Lisa Ecke Admin
+   Addresses:
+   1. Collections sidebar overlaying main content on mobile screens
+   2. Media library modal & action buttons ("Upload", "Download", "Copy", "Delete")
+      overflowing, overlapping, and getting clipped in portrait and landscape
+   3. Post editor & toolbar responsiveness on small screens
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Global Layout & Collections (< 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    -webkit-text-size-adjust: 100% !important;
+  }
+
+  /* App Header & Navigation */
+  [class*="AppHeaderContent"],
+  .e1rbzf6g5 {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 0 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  [class*="AppHeaderNavList"],
+  .e1rbzf6g1 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+  }
+
+  [class*="AppHeaderButton"],
+  .e1rbzf6g4 {
+    padding: 10px 8px !important;
+    font-size: 13.5px !important;
+  }
+
+  /* Hide redundant site link and indicator in mobile header */
+  [class*="AppHeaderSiteLink"],
+  [class*="AppHeaderTestRepoIndicator"] {
+    display: none !important;
+  }
+
+  /* Quick add button on mobile */
+  [class*="AppHeaderQuickNewButton"],
+  .e1rbzf6g2 {
+    margin-right: 4px !important;
+    padding: 6px 22px 6px 10px !important;
+    height: 34px !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    position: relative !important;
+  }
+
+  [class*="AppHeaderQuickNewButton"]::after,
+  .e1rbzf6g2::after {
+    right: 8px !important;
+  }
+
+  /* Main Container */
+  [class*="AppMainContainer"],
+  .eh2m33j2 {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 0 10px 30px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  /* Collections & Sidebar Fix */
+  [class*="CollectionContainer"],
+  .e1sogrfi3 {
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 10px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 14px !important;
+  }
+
+  /* Release sidebar from fixed positioning so it NEVER overlays content */
+  [class*="SidebarContainer"],
+  .e1t18l343 {
+    position: relative !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    margin: 0 0 12px 0 !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+  }
+
+  [class*="SidebarHeading"],
+  .e1t18l342 {
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin: 0 0 6px 0 !important;
+    color: #64748b !important;
+  }
+
+  [class*="SidebarNavList"] {
+    margin: 6px 0 0 0 !important;
+  }
+
+  [class*="SidebarNavLink"] {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+  }
+
+  /* Remove desktop padding-left from collection main */
+  [class*="CollectionMain"],
+  .e1sogrfi2 {
+    padding-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Header inside collection (Newsletters title + New button) */
+  [class*="CollectionTopContainer"],
+  .ei8nkzc4 {
+    margin-bottom: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  [class*="CollectionTopRow"],
+  .ei8nkzc3 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  [class*="CollectionTopHeading"],
+  .ei8nkzc2 {
+    font-size: 1.35rem !important;
+    margin: 0 !important;
+  }
+
+  [class*="CollectionTopNewButton"],
+  .ei8nkzc1 {
+    padding: 0 16px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    font-size: 13.5px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+  }
+
+  [class*="CollectionTopDescription"],
+  .ei8nkzc0 {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    margin-top: 6px !important;
+  }
+
+  /* Controls row (Sort by, Filter by, View Toggle) */
+  [class*="CollectionControlsContainer"],
+  .emfmed70 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+    width: 100% !important;
+  }
+
+  [class*="CollectionControlsContainer"] > div {
+    margin-left: 0 !important;
+  }
+
+  /* Entry Cards in Collection List View */
+  a[href*="/collections/newsletters/entries/"] {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    margin-bottom: 8px !important;
+    word-break: break-word !important;
+    border-radius: 8px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Media Library Modal (Applies to all viewports < 1024px OR landscape phones)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px), (max-height: 550px) {
+  /* Modal Overlay Background */
+  .ReactModal__Overlay,
+  [class*="Modal-overlay"] {
+    position: fixed !important;
+    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    z-index: 99999 !important;
+    background-color: rgba(15, 23, 42, 0.75) !important;
+    backdrop-filter: blur(2px) !important;
+  }
+
+  /* Modal Main Dialog Window */
+  .ReactModal__Content,
+  [class*="StyledModal"],
+  .e4d0svf0,
+  [class*="Modal-dialog"],
+  [class*="MediaLibraryModal"] {
+    position: relative !important;
+    width: calc(100vw - 20px) !important;
+    max-width: 800px !important;
+    min-width: 0 !important;
+    height: 90vh !important;
+    height: 90dvh !important;
+    max-height: 92vh !important;
+    margin: auto !important;
+    padding: 14px 14px !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
+    background: #ffffff !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  /* Top Section of Media Library */
+  [class*="LibraryTop"],
+  .e1n0ky5z2 {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Row 1 inside LibraryTop: Header + Action Buttons */
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child,
+  .e1n0ky5z2 > .e1n0ky5z1:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Header wrapper containing Title and Close button */
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child > div:first-child,
+  .e1n0ky5z2 > .e1n0ky5z1:first-child > div:first-child {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-height: 36px !important;
+    padding-right: 42px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Media Assets Title */
+  [class*="LibraryTitle"],
+  .estf6120 {
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+  }
+
+  /* Close Button: Positioned in top-right corner, cleanly separated from all buttons */
+  [class*="CloseButton"],
+  .estf6121 {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 50% !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10002 !important;
+    cursor: pointer !important;
+  }
+
+  [class*="CloseButton"]:hover,
+  .estf6121:hover {
+    background: #e2e8f0 !important;
+  }
+
+  [class*="CloseButton"] svg,
+  .estf6121 svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Row 1 Buttons Container (Copy, Download, Upload) - Gets full dedicated row */
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child > [class*="ButtonsContainer"],
+  .e1n0ky5z2 > .e1n0ky5z1:first-child > .e1n0ky5z0 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Individual Action Buttons */
+  [class*="ButtonsContainer"] button,
+  [class*="ButtonsContainer"] label,
+  .e1n0ky5z0 button,
+  .e1n0ky5z0 label {
+    margin: 0 !important;
+    padding: 0 14px !important;
+    font-size: 13px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 1 auto !important;
+  }
+
+  /* Highlight Upload Button so Lisa can immediately spot and tap it */
+  [class*="ButtonsContainer"] label[for],
+  .e1n0ky5z0 label[for] {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    box-shadow: 0 1px 4px rgba(30, 41, 59, 0.25) !important;
+    font-weight: 700 !important;
+  }
+
+  /* Row 2: Search Input and Delete Selected / Action Container */
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child,
+  .e1n0ky5z2 > .e1n0ky5z1:last-child {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child > [class*="SearchContainer"],
+  .e1n0ky5z2 > .e1n0ky5z1:last-child > [class*="SearchContainer"] {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+    height: 34px !important;
+    margin: 0 !important;
+    position: relative !important;
+  }
+
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child > [class*="ButtonsContainer"],
+  .e1n0ky5z2 > .e1n0ky5z1:last-child > .e1n0ky5z0 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  [class*="SearchInput"],
+  .el0uck01 {
+    width: 100% !important;
+    height: 34px !important;
+    padding: 6px 10px 6px 32px !important;
+    font-size: 13.5px !important;
+    box-sizing: border-box !important;
+    border-radius: 6px !important;
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Delete Selected Button */
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child button {
+    flex-shrink: 0 !important;
+    padding: 0 12px !important;
+    font-size: 12.5px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Media Grid Container & Scrolling */
+  [class*="CardGridContainer"],
+  .e1l5oka22 {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 6px 2px !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  [class*="CardGrid"],
+  .e1l5oka21 {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Individual Media Cards */
+  [class*="CardGrid"] > *,
+  .e1l5oka21 > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 140px !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Special landscape tuning for phones (e.g. iPhone horizontal: height <= 450px)
+   -------------------------------------------------------------------------- */
+@media (max-height: 450px) and (orientation: landscape) {
+  .ReactModal__Content,
+  [class*="StyledModal"],
+  .e4d0svf0 {
+    height: 96vh !important;
+    height: 96dvh !important;
+    padding: 10px 14px !important;
+  }
+
+  /* In landscape, there's enough horizontal width to keep header on 1 row */
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child,
+  .e1n0ky5z2 > .e1n0ky5z1:first-child {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-right: 44px !important;
+  }
+
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child > div:first-child {
+    width: auto !important;
+    padding-right: 0 !important;
+  }
+
+  [class*="LibraryTop"] > [class*="RowContainer"]:first-child > [class*="ButtonsContainer"] {
+    width: auto !important;
+  }
+
+  [class*="CardGrid"],
+  .e1l5oka21 {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+    gap: 8px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Extra tight mobile portrait viewports (under 380px - iPhone SE / Mini)
+   -------------------------------------------------------------------------- */
+@media (max-width: 380px) {
+  [class*="LibraryTitle"],
+  .estf6120 {
+    font-size: 1.1rem !important;
+  }
+
+  [class*="ButtonsContainer"] button,
+  [class*="ButtonsContainer"] label,
+  .e1n0ky5z0 button,
+  .e1n0ky5z0 label {
+    padding: 0 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* Wrap search and delete button if viewport is very narrow */
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child {
+    flex-wrap: wrap !important;
+  }
+
+  [class*="LibraryTop"] > [class*="RowContainer"]:last-child > [class*="SearchContainer"] {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Post Editor Responsiveness (< 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+  [class*="EditorContainer"],
+  .e1nx103k4 {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    padding-top: 56px !important;
+  }
+
+  [class*="ToolbarContainer"],
+  .e1d2l9mo22 {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important;
+  }
+
+  [class*="ToolbarSectionBack"],
+  .e1d2l9mo21 {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  [class*="BackCollection"],
+  [class*="BackStatus"] {
+    font-size: 0.72rem !important;
+  }
+
+  [class*="ToolbarSectionMain"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  [class*="PublishedToolbarButton"] {
+    padding: 0 10px !important;
+    font-size: 13px !important;
+  }
+
+  [class*="ControlPaneContainer"],
+  .e11hw0lx4 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 10px 30px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* SplitPane handling: stack vertically so form controls are full width */
+  .SplitPane.vertical {
+    display: flex !important;
+    flex-direction: column !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .SplitPane.vertical .Pane1,
+  .SplitPane.vertical .Pane2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .SplitPane.vertical .Resizer {
+    display: none !important;
+  }
+
+  /* Form inputs & widgets */
+  [class*="FieldLabel"] {
+    font-size: 14px !important;
+  }
+
+  /* Center and constrain Dropdowns / Select menus */
+  [class*="DropdownList"],
+  .efqlgsg1 {
+    max-width: 90vw !important;
+    box-sizing: border-box !important;
+    z-index: 999999 !important;
+  }
+}
