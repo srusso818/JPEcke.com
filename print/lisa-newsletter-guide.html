@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lisa Ecke - Newsletter Publishing Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* Executive Campaign Print Stylesheet - Precision 4-Page Layout */
+    :root {
+      --primary-navy: #0a2540;
+      --navy-dark: #051424;
+      --navy-light: #163859;
+      --accent-gold: #c59b27;
+      --gold-dark: #946011;
+      --gold-light: #fdfaf2;
+      --gold-border: #e6c875;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --text-subtle: #6b7280;
+      --card-border: #e2e8f0;
+      --success-green: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --draft-amber: #b45309;
+      --draft-bg: #fffbeb;
+      --draft-border: #fcd34d;
+      --font-serif: 'Cinzel', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0;
+    }
+
+    html, body {
+      background-color: #d1d5db;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      font-size: 11.5px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container */
+    .guide-container {
+      width: 8.5in;
+      margin: 20px auto;
+    }
+
+    /* Precision Letter Page */
+    .guide-page {
+      background: #ffffff;
+      width: 8.5in;
+      height: 11in;
+      padding: 0.44in 0.52in 0.4in 0.52in;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .guide-page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+      margin-bottom: 0;
+    }
+
+    @media print {
+      html, body {
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+      .guide-container {
+        width: 100%;
+        margin: 0;
+      }
+      .guide-page {
+        width: 8.5in;
+        height: 11in;
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+      .guide-page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+    }
+
+    .page-main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Running Header & Footer */
+    .running-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      border-bottom: 1.5px solid #cbd5e1;
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+    }
+
+    .running-header-brand {
+      color: var(--primary-navy);
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+    }
+
+    .running-header-tag {
+      color: var(--gold-dark);
+      background: var(--gold-light);
+      border: 1px solid var(--gold-border);
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 8.5px;
+    }
+
+    .running-footer {
+      padding-top: 8px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    .footer-left strong {
+      color: var(--primary-navy);
+      font-weight: 600;
+    }
+
+    .footer-page-num {
+      font-weight: 700;
+      color: var(--primary-navy);
+      background: #f1f5f9;
+      padding: 1px 8px;
+      border-radius: 8px;
+    }
+
+    /* Cover / Header Section */
+    .cover-header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--primary-navy) 65%, var(--navy-light) 100%);
+      color: #ffffff;
+      padding: 18px 24px;
+      border-radius: 6px;
+      border-top: 3.5px solid var(--accent-gold);
+      box-shadow: 0 3px 10px rgba(10, 37, 64, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-pretitle {
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .cover-title {
+      font-family: var(--font-serif);
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .cover-subtitle {
+      font-size: 11.5px;
+      color: #dbeafe;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    .cover-badge-box {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .cover-pill {
+      background: rgba(197, 155, 39, 0.2);
+      border: 1px solid var(--accent-gold);
+      color: #ffd875;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 16px;
+    }
+
+    .cover-admin-url {
+      font-size: 10.5px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-weight: 600;
+    }
+
+    /* Welcome Card */
+    .welcome-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 3.5px solid var(--primary-navy);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+
+    .welcome-title {
+      font-family: var(--font-serif);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 4px;
+    }
+
+    .welcome-text {
+      color: var(--text-main);
+      font-size: 11.5px;
+      line-height: 1.48;
+    }
+
+    /* Workflow Pipeline (The 3-Minute Publishing Flow) */
+    .workflow-section {
+      background: var(--gold-light);
+      border: 1px solid var(--gold-border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    .workflow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .workflow-title {
+      font-family: var(--font-serif);
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--gold-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .workflow-badge {
+      background: var(--gold-dark);
+      color: #ffffff;
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .pipeline-step {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 8px 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pipeline-num {
+      width: 20px;
+      height: 20px;
+      background: var(--primary-navy);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step:last-child .pipeline-num {
+      background: var(--success-green);
+    }
+
+    .pipeline-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .pipeline-desc {
+      font-size: 9px;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+
+    .section-card-title {
+      font-family: var(--font-serif);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 9px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-num-tag {
+      background: var(--primary-navy);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Numbered Step Items */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .step-badge {
+      flex-shrink: 0;
+      width: 19px;
+      height: 19px;
+      background: #e2e8f0;
+      color: var(--primary-navy);
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .step-content {
+      flex: 1;
+      font-size: 11px;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .step-content strong {
+      color: var(--primary-navy);
+      font-weight: 600;
+    }
+
+    /* UI Key / Button Badges */
+    .btn-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-family: var(--font-sans);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      vertical-align: middle;
+      line-height: 1.2;
+    }
+
+    .btn-blue {
+      background: #1d4ed8;
+      color: #ffffff;
+    }
+
+    .btn-green {
+      background: var(--success-green);
+      color: #ffffff;
+    }
+
+    .btn-gray {
+      background: #475569;
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: var(--text-main);
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-radius: 5px;
+      padding: 8px 12px;
+      font-size: 10.5px;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .callout-icon {
+      font-size: 14px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout-tip {
+      background: var(--gold-light);
+      border: 1px solid var(--gold-border);
+      color: #784c0a;
+    }
+
+    .callout-tip strong {
+      color: var(--gold-dark);
+    }
+
+    .callout-safety {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: #14532d;
+    }
+
+    .callout-safety strong {
+      color: #166534;
+    }
+
+    /* Grid Layouts */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Field Card */
+    .field-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 7px 10px;
+    }
+
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .field-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-navy);
+    }
+
+    .field-pill {
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+
+    .pill-required {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .pill-auto {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .pill-key {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .field-help {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Table Styles */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .custom-table th {
+      background: var(--primary-navy);
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 9px;
+      padding: 6px 10px;
+      text-align: left;
+    }
+
+    .custom-table td {
+      padding: 5px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+      line-height: 1.35;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .tool-key {
+      font-weight: 700;
+      font-family: var(--font-sans);
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--primary-navy);
+      display: inline-block;
+      min-width: 22px;
+      text-align: center;
+      font-size: 9.5px;
+    }
+
+    .example-preview {
+      font-style: italic;
+      color: #334155;
+      background: #ffffff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px dashed #cbd5e1;
+      display: inline-block;
+      font-size: 9.5px;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .faq-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 8px 10px;
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    .faq-q {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .faq-a {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Checklist */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .check-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .check-box {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--success-green);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--success-green);
+      font-size: 9.5px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* Visual Toggle Badges */
+    .toggle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .toggle-draft {
+      background: var(--draft-bg);
+      border: 1px solid var(--draft-border);
+      color: var(--draft-amber);
+    }
+
+    .toggle-publish {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success-green);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="guide-container">
+
+    <!-- ==========================================
+         PAGE 1: WELCOME, OVERVIEW & LOGGING IN
+         ========================================== -->
+    <div class="guide-page">
+      <div>
+        <!-- Running Header -->
+        <div class="running-header">
+          <span class="running-header-brand">Lisa Ecke &bull; Washington County Quorum Court District 6</span>
+          <span class="running-header-tag">Official Desk Reference</span>
+        </div>
+
+        <div class="page-main-content">
+          <!-- Cover Header -->
+          <div class="cover-header">
+            <div>
+              <div class="cover-pretitle">Candidate &amp; Staff Desk Reference</div>
+              <h1 class="cover-title">Newsletter Publishing Guide</h1>
+              <p class="cover-subtitle">How to write, format, preview, and publish District 6 campaign updates on jpecke.com</p>
+            </div>
+            <div class="cover-badge-box">
+              <span class="cover-pill">Decap Visual CMS</span>
+              <span class="cover-admin-url">jpecke.com/admin/</span>
+            </div>
+          </div>
+
+          <!-- Welcome Card -->
+          <div class="welcome-card">
+            <h2 class="welcome-title">Welcome, Lisa!</h2>
+            <p class="welcome-text">
+              This guide provides a clear, step-by-step walkthrough for writing and publishing news, community reports, and Quorum Court updates directly to your official campaign website (<strong>jpecke.com</strong>). Everything is managed through a clean visual editor in your standard web browser. <strong>You do not need any coding knowledge or a GitHub account.</strong>
+            </p>
+          </div>
+
+          <!-- The 3-Minute Publishing Flow -->
+          <div class="workflow-section">
+            <div class="workflow-header">
+              <div class="workflow-title">⚡ The 3-Minute Publishing Flow</div>
+              <span class="workflow-badge">At A Glance</span>
+            </div>
+            <div class="pipeline-grid">
+              <div class="pipeline-step">
+                <span class="pipeline-num">1</span>
+                <div class="pipeline-label">Log In</div>
+                <div class="pipeline-desc">Open <strong>jpecke.com/admin</strong> on your computer or phone.</div>
+              </div>
+              <div class="pipeline-step">
+                <span class="pipeline-num">2</span>
+                <div class="pipeline-label">New Article</div>
+                <div class="pipeline-desc">Click the blue <strong>New Newsletter Article</strong> button.</div>
+              </div>
+              <div class="pipeline-step">
+                <span class="pipeline-num">3</span>
+                <div class="pipeline-label">Write &amp; Photo</div>
+                <div class="pipeline-desc">Type your headline, story text, and pick a picture.</div>
+              </div>
+              <div class="pipeline-step">
+                <span class="pipeline-num">4</span>
+                <div class="pipeline-label">Live Preview</div>
+                <div class="pipeline-desc">Review your story in real time on the right-hand screen.</div>
+              </div>
+              <div class="pipeline-step">
+                <span class="pipeline-num">5</span>
+                <div class="pipeline-label">Publish!</div>
+                <div class="pipeline-desc">Click <strong>Publish</strong>. Live on jpecke.com in 60&ndash;90 seconds!</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 1: Logging In -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>1. Logging In to the Editor</span>
+              <span class="section-num-tag">Section 1</span>
+            </div>
+            <ul class="step-list">
+              <li class="step-item">
+                <span class="step-badge">1</span>
+                <div class="step-content">
+                  Open your web browser (Google Chrome, Apple Safari, Microsoft Edge, or Firefox).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-badge">2</span>
+                <div class="step-content">
+                  In your browser's address bar, navigate to: <strong>https://jpecke.com/admin/</strong>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-badge">3</span>
+                <div class="step-content">
+                  You will see the <strong>Lisa Ecke Campaign &bull; Newsletter Administration</strong> login box.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-badge">4</span>
+                <div class="step-content">
+                  Enter your campaign <strong>Email Address</strong> and <strong>Password</strong>, then click <span class="btn-badge btn-blue">Log In</span>.
+                </div>
+              </li>
+            </ul>
+
+            <div class="callout callout-tip" style="margin-top: 10px;">
+              <span class="callout-icon">💡</span>
+              <div>
+                <strong>Lisa's Tip:</strong> Click the bookmark star (or press <kbd>Ctrl+D</kbd> on Windows / <kbd>Cmd+D</kbd> on Mac) to bookmark <strong>jpecke.com/admin/</strong> so you can access your newsletter manager anytime in a single click!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <div class="running-footer">
+        <span class="footer-left">Lisa Ecke Campaign &bull; <strong>Newsletter Publishing Guide</strong></span>
+        <span class="footer-page-num">Page 1 of 4</span>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 2: DASHBOARD TOUR & ARTICLE FIELDS
+         ========================================== -->
+    <div class="guide-page">
+      <div>
+        <!-- Running Header -->
+        <div class="running-header">
+          <span class="running-header-brand">Lisa Ecke &bull; Washington County Quorum Court District 6</span>
+          <span class="running-header-tag">Dashboard &amp; Article Creation</span>
+        </div>
+
+        <div class="page-main-content">
+          <!-- Section 2: Dashboard Tour -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>2. Tour of Your Dashboard</span>
+              <span class="section-num-tag">Section 2</span>
+            </div>
+            <div class="two-col-grid">
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">Left Navigation Sidebar</span>
+                </div>
+                <p class="field-help">
+                  Displays <strong>Newsletters</strong>. Clicking this shows your complete archive of articles and dispatches.
+                </p>
+              </div>
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">Blue "+ New Newsletter Article"</span>
+                </div>
+                <p class="field-help">
+                  Located at top-right. Click <span class="btn-badge btn-blue">+ New Newsletter Article</span> whenever you want to write a new post.
+                </p>
+              </div>
+            </div>
+
+            <div style="margin-top: 6px;">
+              <strong style="font-size: 10px; color: var(--primary-navy); text-transform: uppercase; letter-spacing: 0.05em;">The Three Dashboard Tabs:</strong>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 4px;">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 5px 8px; font-size: 9.5px;">
+                  <strong>📁 All:</strong> Every article ever written in order.
+                </div>
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 9.5px; color: #166534;">
+                  <strong>🟢 Published:</strong> Only articles currently live.
+                </div>
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 4px; padding: 5px 8px; font-size: 9.5px; color: #92400e;">
+                  <strong>📝 Saved Drafts:</strong> Private working drafts.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Creating a New Newsletter (Field Guide) -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>3. Creating a New Article &bull; Field-by-Field Guide</span>
+              <span class="section-num-tag">Section 3</span>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">
+              Click <span class="btn-badge btn-blue">New Newsletter Article</span>. You will see an easy-to-fill form. Here is what each box does:
+            </p>
+
+            <!-- Fields 1 & 2 -->
+            <div class="two-col-grid" style="margin-bottom: 6px;">
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">1. Article Title</span>
+                  <span class="field-pill pill-required">Required</span>
+                </div>
+                <p class="field-help">
+                  The headline for your update. <br>
+                  <em>Example: "Quorum Court Adopts 2027 County Budget Priorities"</em>
+                </p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">2. Publication Date</span>
+                  <span class="field-pill pill-auto">Auto-Filled</span>
+                </div>
+                <p class="field-help">
+                  Automatically fills with today's date and time. You can change this if you are backdating an earlier update.
+                </p>
+              </div>
+            </div>
+
+            <!-- Field 3: Draft Mode (Crucial!) -->
+            <div class="field-card" style="background: #fdfaf2; border-color: var(--gold-border); margin-bottom: 6px;">
+              <div class="field-header">
+                <span class="field-name" style="color: var(--gold-dark); font-size: 11.5px;">
+                  3. Draft Mode (Checkbox) &bull; Your Safety Switch
+                </span>
+                <span class="field-pill pill-key">Key Control</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;">
+                <div style="background: #ffffff; border: 1.5px solid var(--draft-border); border-radius: 4px; padding: 6px 8px;">
+                  <div class="toggle-badge toggle-draft">☑ CHECKED (Draft Mode ON)</div>
+                  <p style="font-size: 9.5px; color: #78350f; margin-top: 3px; line-height: 1.3;">
+                    <strong>100% Private.</strong> Keeps your article completely invisible to voters. Perfect when stepping away or working ahead.
+                  </p>
+                </div>
+                <div style="background: #ffffff; border: 1.5px solid var(--success-border); border-radius: 4px; padding: 6px 8px;">
+                  <div class="toggle-badge toggle-publish">☐ UNCHECKED (Ready for Public)</div>
+                  <p style="font-size: 9.5px; color: #14532d; margin-top: 3px; line-height: 1.3;">
+                    <strong>Ready to Publish.</strong> Article goes live on jpecke.com as soon as you click the green Publish button.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fields 4 & 5 -->
+            <div class="two-col-grid" style="margin-bottom: 6px;">
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">4. URL Slug</span>
+                  <span class="field-pill pill-auto">Leave Blank</span>
+                </div>
+                <p class="field-help">
+                  <strong>Leave this blank!</strong> The system automatically creates a clean web address from your headline.
+                </p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">5. Featured Photograph</span>
+                  <span class="field-pill pill-key">Recommended</span>
+                </div>
+                <p class="field-help">
+                  Click <span class="btn-badge btn-outline">Choose an image</span> to pick or upload a photo from your computer or phone.
+                </p>
+              </div>
+            </div>
+
+            <!-- Fields 6, 7 & 8 -->
+            <div class="two-col-grid" style="margin-bottom: 6px;">
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">6. Caption / Alt Text</span>
+                  <span class="field-pill pill-key">Helpful</span>
+                </div>
+                <p class="field-help">
+                  A short description of the photo. <br>
+                  <em>Example: "Lisa Ecke presenting budget updates to District 6 constituents."</em>
+                </p>
+              </div>
+
+              <div class="field-card">
+                <div class="field-header">
+                  <span class="field-name">7. Article Summary / Excerpt</span>
+                  <span class="field-pill pill-auto">Leave Blank</span>
+                </div>
+                <p class="field-help">
+                  <strong>Leave this blank!</strong> The system automatically uses your first sentence for the preview card on the archive page.
+                </p>
+              </div>
+            </div>
+
+            <div class="field-card">
+              <div class="field-header">
+                <span class="field-name">8. Article Content &bull; Main Story Area</span>
+                <span class="field-pill pill-required">Required</span>
+              </div>
+              <p class="field-help">
+                This is where you write your story! It includes a visual formatting toolbar at the top with buttons for bold text, headings, bullet lists, quotes, and links (see Page 3).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <div class="running-footer">
+        <span class="footer-left">Lisa Ecke Campaign &bull; <strong>Newsletter Publishing Guide</strong></span>
+        <span class="footer-page-num">Page 2 of 4</span>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 3: FORMATTING, PHOTOS & LIVE PREVIEW
+         ========================================== -->
+    <div class="guide-page">
+      <div>
+        <!-- Running Header -->
+        <div class="running-header">
+          <span class="running-header-brand">Lisa Ecke &bull; Washington County Quorum Court District 6</span>
+          <span class="running-header-tag">Formatting, Photography &amp; Preview</span>
+        </div>
+
+        <div class="page-main-content">
+          <!-- Section 4: Formatting Toolbar -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>4. Formatting Your Text &bull; Visual Toolbar Cheat Sheet</span>
+              <span class="section-num-tag">Section 4</span>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 6px;">
+              The <strong>Article Content</strong> box has an easy toolbar at the top. Simply highlight any text and click the icon:
+            </p>
+
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th style="width: 16%;">Toolbar Icon</th>
+                  <th style="width: 33%;">What it Does</th>
+                  <th style="width: 26%;">When to Use It</th>
+                  <th style="width: 25%;">Visual Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="tool-key">B</span> <strong>Bold</strong></td>
+                  <td>Makes selected words bold and prominent</td>
+                  <td>Dates, deadlines, dollar figures</td>
+                  <td><strong>May 12 Primary</strong></td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key"><em>I</em></span> <em>Italic</em></td>
+                  <td>Slants text for emphasis or official titles</td>
+                  <td>Committee names, resolutions</td>
+                  <td><em>Ordinance 2026-08</em></td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">H2</span> <strong>Heading</strong></td>
+                  <td>Creates a large section header</td>
+                  <td>Dividing article into major topics</td>
+                  <td><strong style="color: var(--primary-navy); font-size: 11px;">County Road Investments</strong></td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">H3</span> <strong>Subheading</strong></td>
+                  <td>Creates a medium subsection title</td>
+                  <td>Subtopics under an H2 header</td>
+                  <td><strong style="color: var(--gold-dark); font-size: 10px;">West Fork Bridge Repairs</strong></td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">&ldquo; &rdquo;</span> <strong>Quote</strong></td>
+                  <td>Creates an elegant indented blockquote</td>
+                  <td>Key campaign statements or voter quotes</td>
+                  <td><span class="example-preview">&ldquo;Taxpayers deserve accountability.&rdquo;</span></td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">&bull;</span> <strong>Bullet List</strong></td>
+                  <td>Creates neat, scannable bullet points</td>
+                  <td>Listing accomplishments or priorities</td>
+                  <td>&bull; Fiscal responsibility<br>&bull; First responders</td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">1.</span> <strong>Number List</strong></td>
+                  <td>Creates a sequential numbered step list</td>
+                  <td>Step-by-step instructions</td>
+                  <td>1. Check voter registration<br>2. Early vote May 5</td>
+                </tr>
+                <tr>
+                  <td><span class="tool-key">🔗</span> <strong>Link</strong></td>
+                  <td>Turns highlighted words into clickable links</td>
+                  <td>Linking to county agendas or PDFs</td>
+                  <td><span style="color: #1d4ed8; text-decoration: underline;">View 2027 Budget PDF</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Section 5: Photos & Captions -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>5. Adding Photographs and Captions</span>
+              <span class="section-num-tag">Section 5</span>
+            </div>
+            <div class="two-col-grid">
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 10px;">
+                <strong style="color: var(--primary-navy); font-size: 11px; display: block; margin-bottom: 5px;">
+                  📸 Main Featured Photo (Top of Article)
+                </strong>
+                <p style="font-size: 10px; color: var(--text-muted); line-height: 1.35; margin-bottom: 6px;">
+                  Appears prominently across the top of your article and on the main archive page:
+                </p>
+                <ol style="font-size: 10px; color: var(--text-main); margin-left: 16px; line-height: 1.4;">
+                  <li>In <strong>Featured Photograph</strong>, click <span class="btn-badge btn-outline">Choose an image</span>.</li>
+                  <li>Click <span class="btn-badge btn-blue">Upload new</span> to pick a photo from your computer.</li>
+                  <li>Type a 1-sentence description in the <strong>Caption / Alt Text</strong> box.</li>
+                </ol>
+              </div>
+
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 10px;">
+                <strong style="color: var(--primary-navy); font-size: 11px; display: block; margin-bottom: 5px;">
+                  🖼️ In-Body Photos (Inside Story Text)
+                </strong>
+                <p style="font-size: 10px; color: var(--text-muted); line-height: 1.35; margin-bottom: 6px;">
+                  You can place extra community pictures right inside your story paragraphs:
+                </p>
+                <ol style="font-size: 10px; color: var(--text-main); margin-left: 16px; line-height: 1.4;">
+                  <li>Click inside your story where you want the picture.</li>
+                  <li>In the toolbar, click the <span class="tool-key">+</span> or <strong>Image</strong> icon.</li>
+                  <li>Select your image, enter a caption, and it inserts into your text!</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="callout callout-safety" style="margin-top: 8px;">
+              <span class="callout-icon">✨</span>
+              <div>
+                <strong>Photo Pro-Tip:</strong> Horizontal (landscape) photos look best for the top featured picture! Smartphone photos in <kbd>.jpg</kbd> or <kbd>.png</kbd> format upload smoothly without needing any manual resizing.
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Live Preview -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>6. Live Split-Screen Preview</span>
+              <span class="section-num-tag">Section 6</span>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-main); line-height: 1.4; margin-bottom: 6px;">
+              As you type on the left, the <strong>right-hand pane updates instantly</strong> to show you exactly how your newsletter will look to voters before you publish:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+              <div style="background: #f1f5f9; padding: 4px 6px; border-radius: 4px; font-size: 9.5px; text-align: center; color: var(--primary-navy); font-weight: 600;">
+                Official <strong>Cinzel</strong> Headings
+              </div>
+              <div style="background: #f1f5f9; padding: 4px 6px; border-radius: 4px; font-size: 9.5px; text-align: center; color: var(--primary-navy); font-weight: 600;">
+                Crisp <strong>Inter</strong> Body Copy
+              </div>
+              <div style="background: #fdfaf2; border: 1px solid var(--gold-border); padding: 4px 6px; border-radius: 4px; font-size: 9.5px; text-align: center; color: var(--gold-dark); font-weight: 600;">
+                Navy &amp; Gold Accents
+              </div>
+              <div style="background: #f1f5f9; padding: 4px 6px; border-radius: 4px; font-size: 9.5px; text-align: center; color: var(--primary-navy); font-weight: 600;">
+                Styled Editorial Drop Caps
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <div class="running-footer">
+        <span class="footer-left">Lisa Ecke Campaign &bull; <strong>Newsletter Publishing Guide</strong></span>
+        <span class="footer-page-num">Page 3 of 4</span>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 4: PUBLISHING, EDITING & FAQ
+         ========================================== -->
+    <div class="guide-page">
+      <div>
+        <!-- Running Header -->
+        <div class="running-header">
+          <span class="running-header-brand">Lisa Ecke &bull; Washington County Quorum Court District 6</span>
+          <span class="running-header-tag">Publishing, Updates &amp; FAQ</span>
+        </div>
+
+        <div class="page-main-content">
+          <!-- Section 7 & 8: Saving Drafts vs Publishing -->
+          <div class="two-col-grid">
+            <!-- Draft Card -->
+            <div class="section-card">
+              <div class="section-card-title">
+                <span>7. Saving Private Drafts</span>
+                <span class="section-num-tag" style="background: var(--draft-amber);">Private</span>
+              </div>
+              <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 6px;">
+                Need to step away or wait for more details before publishing?
+              </p>
+              <ul class="step-list">
+                <li class="step-item">
+                  <span class="step-badge">1</span>
+                  <div class="step-content">Make sure <strong>Draft Mode</strong> is <strong>CHECKED</strong>.</div>
+                </li>
+                <li class="step-item">
+                  <span class="step-badge">2</span>
+                  <div class="step-content">Click the green <span class="btn-badge btn-green">Save</span> button in the top bar.</div>
+                </li>
+                <li class="step-item">
+                  <span class="step-badge">3</span>
+                  <div class="step-content">Your work is safely stored under your <strong>Saved Drafts</strong> tab. It is 100% invisible to the public.</div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Publishing Card -->
+            <div class="section-card">
+              <div class="section-card-title">
+                <span>8. Publishing Live to Website</span>
+                <span class="section-num-tag" style="background: var(--success-green);">Live</span>
+              </div>
+              <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 6px;">
+                When your story is complete and ready for District 6 voters:
+              </p>
+              <ul class="step-list">
+                <li class="step-item">
+                  <span class="step-badge">1</span>
+                  <div class="step-content">Make sure <strong>Draft Mode</strong> is <strong>UNCHECKED</strong>.</div>
+                </li>
+                <li class="step-item">
+                  <span class="step-badge">2</span>
+                  <div class="step-content">Click the green <span class="btn-badge btn-green">Publish</span> button in top bar.</div>
+                </li>
+                <li class="step-item">
+                  <span class="step-badge">3</span>
+                  <div class="step-content">Click <strong>Publish now</strong> to confirm.</div>
+                </li>
+                <li class="step-item">
+                  <span class="step-badge">4</span>
+                  <div class="step-content"><strong>That's it!</strong> Live at <strong>jpecke.com/newsletter/</strong> in 60&ndash;90 seconds.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section 9 & 10: Editing Existing & Logging Out -->
+          <div class="two-col-grid">
+            <div class="section-card">
+              <div class="section-card-title">
+                <span>9. Editing an Existing Article</span>
+                <span class="section-num-tag">Section 9</span>
+              </div>
+              <ol style="font-size: 10px; color: var(--text-main); margin-left: 16px; line-height: 1.4;">
+                <li>Go to <strong>jpecke.com/admin/</strong> and log in.</li>
+                <li>In the newsletter list, click on the article you wish to revise.</li>
+                <li>Make your text revisions or change photos.</li>
+                <li>Click <span class="btn-badge btn-green">Publish</span> (or <span class="btn-badge btn-gray">Save</span>).</li>
+                <li>The live article and archive update automatically!</li>
+              </ol>
+            </div>
+
+            <div class="section-card">
+              <div class="section-card-title">
+                <span>10. Logging Out Safely</span>
+                <span class="section-num-tag">Section 10</span>
+              </div>
+              <ol style="font-size: 10px; color: var(--text-main); margin-left: 16px; line-height: 1.4;">
+                <li>Look at the top-right corner (or bottom-left sidebar).</li>
+                <li>Click your user name / email address.</li>
+                <li>Select <strong>Log Out</strong> from the dropdown menu.</li>
+              </ol>
+              <p style="font-size: 9.5px; color: var(--text-subtle); margin-top: 4px;">
+                <em>Your work is always safely preserved upon clicking Save or Publish.</em>
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 11: Frequently Asked Questions & Quick Help -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>11. Frequently Asked Questions &bull; Quick Help</span>
+              <span class="section-num-tag">FAQ</span>
+            </div>
+            <div class="faq-grid">
+              <div class="faq-card">
+                <div class="faq-q">❓ Do I need a GitHub account?</div>
+                <div class="faq-a">
+                  <strong>No!</strong> You only need your email address and password to log in at <strong>jpecke.com/admin/</strong>. Everything else happens behind the scenes.
+                </div>
+              </div>
+
+              <div class="faq-card">
+                <div class="faq-q">⏱️ How long does publishing take?</div>
+                <div class="faq-a">
+                  Usually <strong>60 to 90 seconds</strong>. Our automated system rebuilds the page and updates search indexing. Simply refresh <strong>jpecke.com/newsletter/</strong> to see it live.
+                </div>
+              </div>
+
+              <div class="faq-card">
+                <div class="faq-q">🛡️ Can I unpublish an article?</div>
+                <div class="faq-a">
+                  <strong>Yes!</strong> Open the article, check the <strong>Draft Mode</strong> box, and click Save/Publish. The article is instantly removed from the public website.
+                </div>
+              </div>
+
+              <div class="faq-card">
+                <div class="faq-q">🔑 What if I forget my password?</div>
+                <div class="faq-a">
+                  Click <strong>Forgot password?</strong> on the login screen to receive a secure reset link by email, or contact your campaign webmaster.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pre-Publishing Checklist (Lisa's Quick Reference) -->
+          <div style="background: var(--gold-light); border: 1.5px solid var(--gold-border); border-radius: 6px; padding: 10px 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <strong style="color: var(--gold-dark); font-family: var(--font-serif); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">
+                ✅ Lisa's Pre-Flight Publishing Checklist
+              </strong>
+              <span style="font-size: 8.5px; font-weight: 700; color: var(--gold-dark); background: #ffffff; padding: 1.5px 6px; border-radius: 8px; border: 1px solid var(--gold-border);">30-Second Check</span>
+            </div>
+            <div class="checklist-grid">
+              <div class="check-item"><span class="check-box">✓</span> Catchy, clear article headline entered</div>
+              <div class="check-item"><span class="check-box">✓</span> Featured photograph chosen + short caption</div>
+              <div class="check-item"><span class="check-box">✓</span> Draft Mode UNCHECKED (for public release)</div>
+              <div class="check-item"><span class="check-box">✓</span> Live preview checked on right pane</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Footer -->
+      <div class="running-footer">
+        <span class="footer-left">Lisa Ecke Campaign &bull; <strong>Newsletter Publishing Guide</strong></span>
+        <span class="footer-page-num">Page 4 of 4</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
